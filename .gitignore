@@ -1,1 +1,7 @@
+
+# OS X System Files
 .DS_Store
+
+# IntelliJ Project Files
+Source/Java/.idea/workspace.xml
+Source/Java/out
