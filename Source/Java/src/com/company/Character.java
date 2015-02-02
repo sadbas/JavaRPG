@@ -1,6 +1,7 @@
 package com.company;
 
 import com.company.BaseCharacter;
+import com.company.Enumerations.CharacterClass;
 import com.company.Enumerations.Direction;
 
 /**
@@ -9,11 +10,20 @@ import com.company.Enumerations.Direction;
 
 public class Character extends BaseCharacter {
 
+    private CharacterClass characterClass;
     private Inventory inventory;
     private Map<GearPosition, Item> gear;
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public CharacterClass getCharacterClass() {
+        return this.characterClass;
+    }
+
+    public void setCharacterClass(CharacterClass characterClass) {
+        this.characterClass = characterClass;
     }
 
     public void move(Direction direction) {
