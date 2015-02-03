@@ -2,6 +2,8 @@ package com.company;
 
 import com.company.Helpers.Origin;
 
+import java.awt.*;
+
 /**
  * Created by christian on 02/02/15.
  */
@@ -13,7 +15,7 @@ public abstract class BaseCharacter {
     private Experience experience;
     private Health health;
     private Skill[] skills;
-    private Origin origin;
+    private Point origin;
 
     public String getName() {
         return this.name;
