@@ -4,6 +4,10 @@ package com.company.Map;
  * Created by Christian on 02/02/15.
  */
 
+/**
+ * The MapSymbol-enum contains the characters representing objects,
+ * used on the map, and methods for getting the character from an object.
+ */
 public enum MapSymbol {
 
     Character("C"),
