@@ -37,6 +37,7 @@ public class GameScene {
             update();
         }
     }
+
     private void update() {
 
         // Update map from last turn
