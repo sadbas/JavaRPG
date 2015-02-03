@@ -11,8 +11,8 @@ import com.company.Enumerations.Direction;
 public class Character extends BaseCharacter {
 
     private CharacterClass characterClass;
-    private Inventory inventory;
-    private Map<GearPosition, Item> gear;
+    //private Inventory inventory;
+    //private Map<GearPosition, Item> gear;
 
     public void setName(String name) {
         this.name = name;
@@ -26,10 +26,13 @@ public class Character extends BaseCharacter {
         this.characterClass = characterClass;
     }
 
-    public void move(Direction direction) {
-    }
-
+    /**
+     * Perform a basic attack on the opponent.
+     *
+     * @return A boolean value indicating if the opponent was hit.
+     */
     public boolean attack() {
+        return true;
     }
 
     public void useSkill(Skill skill) {
