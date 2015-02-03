@@ -25,9 +25,15 @@ public void move(Direction) {
 
 }
 
-
+    /**
+     * /Livet ganges med 1,5
+     */ Livet må ikke være mere end maxHealth
+     */
     public void drinkPotion() {
+        this.health *= 1.5f;
 
-
+        if (this.health > this.maxHealth) {
+            this.health = this.maxHealth;
+        }
 }
 }
