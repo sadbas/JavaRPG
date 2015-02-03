@@ -17,9 +17,17 @@ import java.util.ArrayList;
  * Created by christian on 02/02/15.
  */
 
+/**
+ * This class represents a real-world map (in the game), and has the responsibility for
+ * loading a map from a file, populating it with Game-objects, and keeping track of all objects on the map.
+ * It also provides methods for moving objects around on the map.
+ *
+ * A map is essentially a 2-dimensional array consisting of instances of MapObject,
+ * which holds the character shown on the map, and the Game Object that this character represents.
+ */
 public class Map {
 
-    private Object[][] map;
+    private MapObject[][] map;
 
     private void loadMap(String name, Character character) {
         try {
@@ -42,7 +50,7 @@ public class Map {
                 // Initialize map
                 int rows = lines.size();
                 int columns = lines.get(0).length();
-                this.map = new Object[rows][columns];
+                this.map = new MapObject[rows][columns];
 
                 // Parse rows and columns
                 for (int y = 0; y < rows; y++) {
