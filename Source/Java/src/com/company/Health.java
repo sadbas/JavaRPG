@@ -5,6 +5,19 @@ package com.company;
  */
 
 public class Health {
-    public int health;
-    public int maxHealth;
+    private int health;
+    private int maxHealth;
+
+    public Health(int health, int maxHealth) {
+        this.health = health;
+        this.maxHealth = maxHealth;
+    }
+
+    public int getHealth() {
+        return this.health;
+    }
+
+    public int getMaxHealth() {
+        return this.maxHealth;
+    }
 }
