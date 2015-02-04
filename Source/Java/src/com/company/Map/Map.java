@@ -4,13 +4,11 @@ import com.company.Character;
 import com.company.Enumerations.Direction;
 import com.company.GameObjects.GameObject;
 import com.company.GameObjects.GameObjectFactory;
-import com.company.Map.MapObject;
-import org.omg.CosNaming.NamingContextPackage.NotFound;
 
 import java.awt.*;
 import java.io.*;
-import java.lang.reflect.Array;
 import java.net.URL;
+import java.rmi.activation.UnknownObjectException;
 import java.util.ArrayList;
 
 /**
@@ -21,7 +19,7 @@ import java.util.ArrayList;
  * This class represents a real-world map (in the game), and has the responsibility for
  * loading a map from a file, populating it with Game-objects, and keeping track of all objects on the map.
  * It also provides methods for moving objects around on the map.
- *
+ * <p/>
  * A map is essentially a 2-dimensional array consisting of instances of MapObject,
  * which holds the character shown on the map, and the Game Object that this character represents.
  */
@@ -63,8 +61,13 @@ public class Map {
                             this.map[x][y] = new MapObject(s, character);
                         } else {
                             MapSymbol symbol = MapSymbol.fromString(s);
-                            Object obj = GameObjectFactory.objectFromMapSymbol(symbol);
-                            this.map[x][y] = new MapObject(s, obj);
+                            Object obj = null;
+                            try {
+                                obj = GameObjectFactory.objectFromMapSymbol(symbol);
+                                this.map[x][y] = new MapObject(s, obj);
+                            } catch (UnknownObjectException e) {
+                                e.printStackTrace();
+                            }
                         }
                     }
                 }
@@ -112,7 +115,7 @@ public class Map {
      * or null if a move was not possible e.g. the object was not found,
      * or there is something blocking the path.
      *
-     * @param obj The object to move. This will usually be the Character.
+     * @param obj       The object to move. This will usually be the Character.
      * @param direction The direction the object should be moved.
      * @return The object that was at the destination point before moving, or null if the object could not move.
      */
@@ -144,11 +147,10 @@ public class Map {
         }
 
         // Check if new point will be out of bounds
-        // TODO Gives error
-        /*if (newPoint.x < 0 || newPoint.x > numberOfColumns() ||
-                newPoint.y < 0 || newPoint.y > numberOfRows()){
+        if (newPoint.x < 0 || newPoint.x > numberOfColumns() ||
+                newPoint.y < 0 || newPoint.y > numberOfRows()) {
             return null;
-        }*/
+        }
 
         // Move (swap) objects
         this.map[point.x][point.y] = destinationMapObject;
