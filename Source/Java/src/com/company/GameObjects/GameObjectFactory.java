@@ -8,6 +8,7 @@ import com.company.GameObjects.NatureObjects.Ground;
 import com.company.GameObjects.NatureObjects.Rock;
 import com.company.GameObjects.NatureObjects.Wall;
 import com.company.Map.MapSymbol;
+import com.company.Monster;
 
 import java.rmi.activation.UnknownObjectException;
 
