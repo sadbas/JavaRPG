@@ -19,7 +19,7 @@ import java.util.ArrayList;
  * This class represents a real-world map (in the game), and has the responsibility for
  * loading a map from a file, populating it with Game-objects, and keeping track of all objects on the map.
  * It also provides methods for moving objects around on the map.
- * <p/>
+ *
  * A map is essentially a 2-dimensional array consisting of instances of MapObject,
  * which holds the character shown on the map, and the Game Object that this character represents.
  */
