@@ -28,29 +28,28 @@ public class Player {
     public void addCharacter() {
         System.out.println("New Character:");
 
-        Character character = new Character();
-
-        // Set Character Class
+        // Character Class
         System.out.println("Select Class:");
         System.out.println("[R]ogue");
         System.out.println("[S]orcerer");
         System.out.println("[W]arrior");
 
         String c = input.next();
+        CharacterClass characterClass = CharacterClass.Warrior;
         if (c.equals("r")) {
-            character.setCharacterClass(CharacterClass.Rogue);
+            characterClass = CharacterClass.Rogue;
         } else if (c.equals("s")) {
-            character.setCharacterClass(CharacterClass.Sorcerer);
+            characterClass = CharacterClass.Sorcerer;
         } else if (c.equals("w")) {
-            character.setCharacterClass(CharacterClass.Warrior);
+            characterClass = CharacterClass.Warrior;
         }
 
-        // Set name
+        // Name
         System.out.print("Name: ");
-        character.setName(input.next());
+        String name = input.next();
 
-        // Add to players list of characters
-        this.characters.add(character);
+        // Create character and add to players list of characters
+        this.characters.add(new Character(characterClass, name));
     }
 
     public void deleteCharacter(Character character) {
