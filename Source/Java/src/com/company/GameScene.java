@@ -44,23 +44,24 @@ public class GameScene {
         Toolbox.clear();
         renderMap();
 
-        // Players Move
+        // Players Turn
         System.out.println();
         System.out.println("Use WASD-keys to move around");
         System.out.println("What's your move?: ");
-        String move = input.next();
+        String action = input.next();
 
         Point newPoint = new Point();
-        if (move.equals("w")) {
+        // TODO Use Switch (Not available on OS X - Java SDK 1.6)
+        if (action.equals(GameAction.MoveUp.toString())) {
             this.map.move(character, Direction.North);
         }
-        else if (move.equals("a")) {
+        else if (action.equals(GameAction.MoveLeft.toString())) {
             this.map.move(character, Direction.West);
         }
-        else if (move.equals("s")) {
+        else if (action.equals(GameAction.MoveDown.toString())) {
             this.map.move(character, Direction.South);
         }
-        else if (move.equals("d")) {
+        else if (action.equals(GameAction.MoveRight.toString())) {
             this.map.move(character, Direction.East);
         }
 
