@@ -1,4 +1,4 @@
-package com.company;
+package com.company.Skills;
 
 /**
  * Created by christian on 02/02/15.
