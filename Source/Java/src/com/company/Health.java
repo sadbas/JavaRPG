@@ -4,20 +4,15 @@ package com.company;
  * Created by christian on 02/02/15.
  */
 
+/**
+ * The Health-class representing a healthpool, behaves like a data type,
+ * and contains properties for current and maximum health.
+ */
 public class Health {
-    private int health;
-    private int maxHealth;
 
-    public Health(int health, int maxHealth) {
-        this.health = health;
-        this.maxHealth = maxHealth;
-    }
+    /** The current health.*/
+    public float health;
 
-    public int getHealth() {
-        return this.health;
-    }
-
-    public int getMaxHealth() {
-        return this.maxHealth;
-    }
+    /** The maximum health. */
+    public float maxHealth;
 }
