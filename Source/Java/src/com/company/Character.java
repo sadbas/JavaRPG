@@ -1,5 +1,6 @@
 package com.company;
 
+import com.company.Enumerations.CharacterClass;
 import com.company.Enumerations.Direction;
 
 /**
@@ -11,12 +12,12 @@ public class Character extends BaseCharacter {
     //private Inventory inventory;
     //private Map<GearPosition, Item> gear;
 
-    public void setName(String name) {
-        this.name =name;
-    }
-
-public void move(Direction) {
-
+    public Character(CharacterClass characterClass, String name) {
+        this.characterClass = characterClass;
+        this.name = name;
+        this.level = 1;
+        this.experience = new Experience();
+        this.baseDamage = 4;
     }
 
     /**
@@ -28,20 +29,21 @@ public void move(Direction) {
         return true;
     }
 
-
-    public void useSkill(Skill skill){
-
-}
+    public void useSkill(Skill skill) {
+    }
 
     /**
-     * /Livet ganges med 1,5
-     */ Livet må ikke være mere end maxHealth
+     * Drink potion to replenish 50% of current health, or no more than maximum health.
      */
     public void drinkPotion() {
-        this.health *= 1.5f;
 
-        if (this.health > this.maxHealth) {
-            this.health = this.maxHealth;
+        //TODO Search inventory to see if character has potion.
+        //TODO Can only heal if character has potion
+
+        this.health.health *= 1.5f;
+
+        if (this.health.health > this.health.maxHealth) {
+            this.health.health = this.health.maxHealth;
         }
-}
+    }
 }
