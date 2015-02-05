@@ -35,6 +35,25 @@ public class Map {
     private Point previousCharacterOrigin = new Point();
     private MapObject lastAffectedObject;
 
+    /**
+     * Designated constructor for a map.
+     * <p>
+     * This method instantiates and loads a new map of the specified name,
+     * and populates it with the specified character, along with other objects on the map.
+     *
+     * @param name The name of the map.
+     * @param character The players character.
+     */
+    public Map(String name, com.company.Character character) {
+        loadMap(name, character);
+    }
+
+    /**
+     * Loads and populates a map from file.
+     *
+     * @param name The name of the map.
+     * @param character The players character.
+     */
     private void loadMap(String name, Character character) {
         try {
             URL location = Map.class.getProtectionDomain().getCodeSource().getLocation();
@@ -93,22 +112,40 @@ public class Map {
         }
     }
 
-    public Map(String name, com.company.Character character) {
-        loadMap(name, character);
-    }
-
+    /**
+     * Returns the number of rows on the map.
+     *
+     * @return Number of rows on the map.
+     */
     public int numberOfRows() {
         return this.map.length;
     }
 
+    /**
+     * Returns the number of columns on the map.
+     *
+     * @return Number of columns on the map.
+     */
     public int numberOfColumns() {
         return this.map[0].length;
     }
 
+    /**
+     * Returns the object at the specified point on the map.
+     *
+     * @param point The point where the object resides.
+     * @return The object at the specified point.
+     */
     public MapObject objectAtPoint(Point point) {
         return (MapObject) this.map[point.x][point.y];
     }
 
+    /**
+     * Returns the point for a specified object on the map, if found.
+     *
+     * @param obj The object to find.
+     * @return The point on the map where the object is located, or null if object is not found.
+     */
     private Point pointForObject(Object obj) {
         for (int y = 0; y < numberOfRows(); y++) {
             for (int x = 0; x < numberOfColumns(); x++) {
@@ -180,7 +217,8 @@ public class Map {
 
     /**
      * Removes an object from the map, and replaces it with a Ground-object.
-     * This method is almost only used to remove monsters when they die.
+     * This method is almost exclusively used to remove monsters when they die.
+     *
      * @param obj The object to remove.
      */
     public void removeObject(Object obj) {
@@ -193,6 +231,12 @@ public class Map {
         }
     }
 
+    /**
+     * Swaps two objects on the map.
+     *
+     * @param obj1 First object.
+     * @param obj2 Seconds object.
+     */
     private void swapObjects(MapObject obj1, MapObject obj2) {
         Point obj1Point = pointForObject(obj1);
         Point obj2Point = pointForObject(obj2);
@@ -203,6 +247,10 @@ public class Map {
         updateCharacterOrigin();
     }
 
+    /**
+     * Updates properties holding character positions.
+     * Used in <code>resetCharacter()</code>.
+     */
     private void updateCharacterOrigin() {
         this.previousCharacterOrigin = this.characterOrigin;
         this.characterOrigin = pointForObject(this.characterObject.getObject());
