@@ -5,7 +5,7 @@ package com.company;
  */
 
 /**
- * The Health-class representing a healthpool, behaves like a data type,
+ * The Health-class representing a healthpool, acts as a data type,
  * and contains properties for current and maximum health.
  */
 public class Health {
