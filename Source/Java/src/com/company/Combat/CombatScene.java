@@ -24,7 +24,7 @@ public class CombatScene {
     //region Properties
     private static final Scanner input = new Scanner(System.in);
 
-    private com.company.Character character;
+    private Character character;
     private Monster monster;
     //endregion
 
@@ -216,7 +216,7 @@ public class CombatScene {
     }
 
     /**
-     * Convinience-method for sleeping (waiting) for a specified number of milliseconds.
+     * Convenience-method for sleeping (waiting) for a specified number of milliseconds.
      *
      * @param ms A number of milliseconds to sleep.
      */

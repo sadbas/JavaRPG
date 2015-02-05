@@ -43,12 +43,12 @@ public class Monster extends BaseCharacter {
     //endregion
 
     //region Accessors and Modifiers
-
     /**
      * Returns the damage of the monster.
      *
      * @return The damage as a float value.
      */
+    //TODO Move to BaseCharacter
     public float getDamage() {
         return this.damage;
     }
@@ -58,6 +58,7 @@ public class Monster extends BaseCharacter {
      *
      * @return An instance of <code>Health</code>.
      */
+    //TODO Move to BaseCharacter
     public Health getHealth() {
         return this.health;
     }
@@ -77,6 +78,7 @@ public class Monster extends BaseCharacter {
      * @return An integer-value representing the amount of gold dropped.
      */
     public int goldDropped() {
+        //TODO Move to Gold-constructor
         Random r = new Random();
         int min = 1;
         int max = 30;
