@@ -4,7 +4,8 @@ package com.company.Skills;
  * Created by christian on 02/02/15.
  */
 
-public abstract class Skill implements ISkill {
+
+public abstract class Skill {
 
     /** The name of the skill. */
     private String name;
