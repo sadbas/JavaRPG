@@ -8,8 +8,12 @@ package com.company.Enumerations;
  * The Direction-enum defines directions that a character can move.
  */
 public enum Direction {
+    /** North or Up. */
     North,
+    /** East or Right. */
     East,
+    /** South or Down. */
     South,
+    /** West or Left. */
     West
 }
