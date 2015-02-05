@@ -4,6 +4,8 @@ import com.company.Character;
 import com.company.Enumerations.Direction;
 import com.company.GameObjects.GameObject;
 import com.company.GameObjects.GameObjectFactory;
+import com.company.GameObjects.NatureObjects.Ground;
+import com.company.Monster;
 
 import java.awt.*;
 import java.io.*;
@@ -19,13 +21,19 @@ import java.util.ArrayList;
  * This class represents a real-world map (in the game), and has the responsibility for
  * loading a map from a file, populating it with Game-objects, and keeping track of all objects on the map.
  * It also provides methods for moving objects around on the map.
- *
+ * <p/>
  * A map is essentially a 2-dimensional array consisting of instances of MapObject,
  * which holds the character shown on the map, and the Game Object that this character represents.
  */
 public class Map {
 
     private MapObject[][] map;
+
+    private MapObject characterObject;
+    private Point characterSpawnOrigin = new Point();
+    private Point characterOrigin = new Point();
+    private Point previousCharacterOrigin = new Point();
+    private MapObject lastAffectedObject;
 
     private void loadMap(String name, Character character) {
         try {
@@ -58,12 +66,17 @@ public class Map {
                         // Populate map
                         String s = String.valueOf(row[x]);
                         if (s.equals((MapSymbol.Character.toString()))) {
-                            this.map[x][y] = new MapObject(s, character);
+                            this.characterObject = new MapObject(s, character);
+                            this.map[x][y] = this.characterObject;
+
+                            this.characterSpawnOrigin = new Point(x, y);
+                            this.characterOrigin = new Point(x, y);
                         } else {
                             MapSymbol symbol = MapSymbol.fromString(s);
                             Object obj = null;
                             try {
                                 obj = GameObjectFactory.objectFromMapSymbol(symbol);
+                                System.out.println(x + " " + y);
                                 this.map[x][y] = new MapObject(s, obj);
                             } catch (UnknownObjectException e) {
                                 e.printStackTrace();
@@ -119,7 +132,7 @@ public class Map {
      * @param direction The direction the object should be moved.
      * @return The object that was at the destination point before moving, or null if the object could not move.
      */
-    public Object move(Object obj, Direction direction) {
+    public GameObject move(Object obj, Direction direction) {
         Point point = pointForObject(obj);
         MapObject movingMapObject = objectAtPoint(point);
         Point newPoint = new Point();
@@ -152,10 +165,56 @@ public class Map {
             return null;
         }
 
-        // Move (swap) objects
-        this.map[point.x][point.y] = destinationMapObject;
-        this.map[newPoint.x][newPoint.y] = movingMapObject;
+        // Don't move if monster
+        if (!((GameObject) destinationMapObject.getObject() instanceof Monster)) {
+            // Move (swap) objects
+            this.map[point.x][point.y] = destinationMapObject;
+            this.map[newPoint.x][newPoint.y] = movingMapObject;
+            lastAffectedObject = destinationMapObject;
 
-        return destinationMapObject.getObject();
+            updateCharacterOrigin();
+        }
+
+        return (GameObject) destinationMapObject.getObject();
+    }
+
+    /**
+     * Removes an object from the map, and replaces it with a Ground-object.
+     * This method is almost only used to remove monsters when they die.
+     * @param obj The object to remove.
+     */
+    public void removeObject(Object obj) {
+        Point p = pointForObject(obj);
+        try {
+            Object ground = GameObjectFactory.objectFromMapSymbol(MapSymbol.Ground);
+            this.map[p.x][p.y] = new MapObject(MapSymbol.Ground.toString(), ground);
+        } catch (UnknownObjectException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void swapObjects(MapObject obj1, MapObject obj2) {
+        Point obj1Point = pointForObject(obj1);
+        Point obj2Point = pointForObject(obj2);
+
+        this.map[obj1Point.x][obj1Point.y] = obj2;
+        this.map[obj2Point.x][obj2Point.y] = obj1;
+
+        updateCharacterOrigin();
+    }
+
+    private void updateCharacterOrigin() {
+        this.previousCharacterOrigin = this.characterOrigin;
+        this.characterOrigin = pointForObject(this.characterObject.getObject());
+    }
+
+    /**
+     * Moves the character to the spawn point (in town).
+     * @warning This method must only be invoked when a character dies.
+     */
+    public void resetCharacter() {
+        this.map[characterSpawnOrigin.x][characterSpawnOrigin.y] = this.characterObject;
+        this.map[characterOrigin.x][characterOrigin.y] = this.lastAffectedObject;
+        updateCharacterOrigin();
     }
 }
