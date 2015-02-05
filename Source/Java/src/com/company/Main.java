@@ -1,7 +1,7 @@
 package com.company;
 
-import com.company.Helpers.Toolbox;
 import com.company.Enumerations.CharacterClass;
+import com.company.Helpers.Console;
 
 import javax.tools.Tool;
 import java.util.ArrayList;
@@ -13,20 +13,19 @@ public class Main {
 
         Scanner input = new Scanner(System.in);
 
-        System.out.println("-- Diablo --");
-        System.out.println();
-        System.out.println();
-
-        System.out.println("Let's start by creating a Player.");
+        Console.println("-- Diablo --");
+        Console.newln();
+        Console.newln();
 
         // Create new player
+        Console.println("NEW PLAYER");
         Player player = new Player();
-        System.out.print("What's your name? ");
+        Console.print("What's your name? ");
         player.name = input.next();
-        System.out.print("How old are you? ");
+        Console.print("How old are you? ");
         player.age = input.nextInt();
 
-        Toolbox.clear();
+        Console.clear();
 
         ArrayList<Character> characters = player.getCharacters();
 
@@ -39,7 +38,6 @@ public class Main {
             Console.println("[R]ogue");
             Console.println("[S]orcerer");
             Console.println("[W]arrior");
-        System.out.println("Select Character:");
 
             String c = input.next();
             CharacterClass characterClass = CharacterClass.Warrior;
@@ -58,11 +56,12 @@ public class Main {
             player.addCharacter(new Character(characterClass, name));
         }
 
-        Toolbox.clear();
+        Console.clear();
 
         // Main Menu
         //TODO Store characters in file
         //TODO Make it possible to select between all created characters
+        //Console.println("Select Character:");
         Character character;
         /*for (int i = 0; i < characters.size(); i++) {
             character = characters.get(i);
