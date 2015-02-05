@@ -11,6 +11,14 @@ import java.util.Scanner;
  * Created by christian on 02/02/15.
  */
 
+/**
+ * The Combat Scene controls combat between the character and a monster.
+ * <p/>
+ * When an instance of combat is created, the scene will be loaded,
+ * and the properties of the monster will be adjusted according to the characters level.
+ * <p/>
+ * After instantiating this class you must call <code>fight()</code> to enter combat, and render the scene.
+ */
 public class CombatScene {
 
     //region Properties
@@ -20,7 +28,12 @@ public class CombatScene {
     private Monster monster;
     //endregion
 
-    //region Constructors
+    /**
+     * Designated Constructor for creating an CombatScene with a character and an opponent monster.
+     *
+     * @param character The instance of the players character.
+     * @param monster The instance of the enemy monster to fight against.
+     */
     public CombatScene(Character character, Monster monster) {
         this.character = character;
         this.monster = monster;
@@ -30,14 +43,24 @@ public class CombatScene {
         // Calculate attributes for monster
         monster.setLevel(character.getLevel());
     }
-    //endregion
 
+    /**
+     * Loads the scene, and prepares all participants.
+     */
     private void loadScene() {
 
         // Calculate attributes for monster
         monster.setLevel(character.getLevel());
     }
 
+    /**
+     * Start the fight.
+     * <p>
+     * This enters combat, renders the scene and handles each participants turn based on user input.
+     * A fight will go on until one of the participants dies.
+     *
+     * @return True if character wins the fight i.e. the monster dies, or false if character dies.
+     */
     public boolean fight() {
 
         while (character.getHealth().health > 0) {
@@ -46,18 +69,17 @@ public class CombatScene {
 
             // Handle effects
 
-            // If stunned, there's a 90% chance it will be removed
+            // If stunned, there's a 80% chance it will be removed
             /*if (character.isStunned) {
                 Random ran = new Random();
-                if (ran.nextFloat() <= 0.90) {
+                if (ran.nextFloat() <= 0.80) {
                     character.isStunned = false;
                     Console.println("You are no longer stunned.");
                 }
             }*/
-
             if (monster.isStunned) {
                 Random ran = new Random();
-                if (ran.nextFloat() <= 0.90) {
+                if (ran.nextFloat() <= 0.80) {
                     monster.isStunned = false;
                     Console.println(monster.getName() + " is no longer stunned.");
                 }
@@ -103,6 +125,8 @@ public class CombatScene {
                     float health = character.drinkPotion();
                     Console.println("You regained " + health + " health.");
                 }
+            } else {
+                Console.println("You're unable to move.");
             }
 
             if (monster.isDead()) {
@@ -135,22 +159,19 @@ public class CombatScene {
                 sleep(2000);
 
                 return true;
-            }
-
-            Console.newln();
-            sleep(500);
-
-            // Monsters turn
-            if (!monster.isStunned) {
-                Attack attack = new Attack(monster.getDamage(), false);
-                float damageTaken = character.defend(attack);
-                Console.println(monster.getName() + " attacked you with " + damageTaken + " damage.");
             } else {
-                Console.println(monster.getName() + " is stunned!");
-            }
+                // Monsters turn
+                if (!monster.isStunned) {
+                    Attack attack = new Attack(monster.getDamage(), false);
+                    float damageTaken = character.defend(attack);
+                    Console.println(monster.getName() + " attacked you with " + damageTaken + " damage.");
+                } else {
+                    Console.println(monster.getName() + " cannot move!");
+                }
 
-            if (character.isDead()) {
-                return false;
+                if (character.isDead()) {
+                    return false;
+                }
             }
 
             // Sleep so we can read event before the scene is rendered again.
@@ -160,6 +181,9 @@ public class CombatScene {
         return false;
     }
 
+    /**
+     * Renders and displays the scene.
+     */
     private void renderScene() {
         Console.clear();
 
@@ -170,14 +194,14 @@ public class CombatScene {
         // Render Monster
         Console.println("     " + this.monster.getName());
         Console.println("     " + "Level: " + this.monster.getLevel());
-        Console.println("     " + "Health: " + (int)this.monster.getHealth().health + "/" + (int)this.monster.getHealth().maxHealth);
+        Console.println("     " + "Health: " + (int) this.monster.getHealth().health + "/" + (int) this.monster.getHealth().maxHealth);
         Console.newln();
         Console.newln();
 
         // Render Character
         Console.println("                                       " + this.character.getName());
         Console.println("                                       Level: " + this.character.getLevel());
-        Console.println("                                       Health: " + (int)this.character.getHealth().health + "/" + (int)this.character.getHealth().maxHealth);
+        Console.println("                                       Health: " + (int) this.character.getHealth().health + "/" + (int) this.character.getHealth().maxHealth);
         Console.newln();
         Console.newln();
 
@@ -191,6 +215,11 @@ public class CombatScene {
         Console.newln();
     }
 
+    /**
+     * Convinience-method for sleeping (waiting) for a specified number of milliseconds.
+     *
+     * @param ms A number of milliseconds to sleep.
+     */
     private void sleep(long ms) {
         try {
             Thread.sleep(ms);
