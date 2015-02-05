@@ -1,6 +1,7 @@
 package com.company;
 
 import com.company.Helpers.Toolbox;
+import com.company.Enumerations.CharacterClass;
 
 import javax.tools.Tool;
 import java.util.ArrayList;
@@ -30,21 +31,43 @@ public class Main {
         ArrayList<Character> characters = player.getCharacters();
 
         if (characters.size() == 0) {
-            System.out.println("  NEW CHARACTER  ");
-            System.out.println();
+            Console.println("NEW CHARACTER");
+            Console.newln();
 
-            player.addCharacter();
+            // Character Class
+            Console.println("Select Class:");
+            Console.println("[R]ogue");
+            Console.println("[S]orcerer");
+            Console.println("[W]arrior");
+        System.out.println("Select Character:");
+
+            String c = input.next();
+            CharacterClass characterClass = CharacterClass.Warrior;
+            if (c.equals("r")) {
+                characterClass = CharacterClass.Rogue;
+            } else if (c.equals("s")) {
+                characterClass = CharacterClass.Sorcerer;
+            } else if (c.equals("w")) {
+                characterClass = CharacterClass.Warrior;
+            }
+
+            // Name
+            System.out.print("Name: ");
+            String name = input.next();
+
+            player.addCharacter(new Character(characterClass, name));
         }
 
         Toolbox.clear();
 
         // Main Menu
-        System.out.println("Select Character:");
+        //TODO Store characters in file
+        //TODO Make it possible to select between all created characters
         Character character;
-        for (int i = 0; i < characters.size(); i++) {
+        /*for (int i = 0; i < characters.size(); i++) {
             character = characters.get(i);
-            System.out.println(i + ") " + character.getName());
-        }
+            Console.println(i + ") " + character.getName());
+        }*/
         //System.out.println("[A]dd Character | [D]elete Character");
 
         character = player.getCharacters().get(0);
