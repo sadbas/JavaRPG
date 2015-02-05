@@ -3,12 +3,19 @@ package com.company;
 import com.company.Enumerations.CharacterClass;
 import com.company.Helpers.Console;
 
-import javax.tools.Tool;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * The main class for this program.
+ */
 public class Main {
 
+    /**
+     * The main method for this program.
+     *
+     * @param args Not used.
+     */
     public static void main(String[] args) {
 
         Scanner input = new Scanner(System.in);
