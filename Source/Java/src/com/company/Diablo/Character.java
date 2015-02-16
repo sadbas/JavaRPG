@@ -56,15 +56,6 @@ public class Character extends BaseCharacter {
         return this.damage;
     }
 
-    /**
-     * Returns the characters health.
-     *
-     * @return An instance of <code>Health</code>.
-     */
-    public Health getHealth() {
-        return this.health;
-    }
-
     public int getGold() {
         return this.gold;
     }

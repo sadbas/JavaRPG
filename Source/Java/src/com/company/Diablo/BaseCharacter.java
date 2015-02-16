@@ -22,9 +22,8 @@ public abstract class BaseCharacter extends GameObject implements IBaseCharacter
 
     protected BaseCharacter() {
         this.name = "";
-        //this.level = 1;
         this.experience = new Experience();
-        //this.skills = {new NormalAttack(), null, null, null};
+        this.health = new Health();
     }
 
     //region Accessors
@@ -48,6 +47,15 @@ public abstract class BaseCharacter extends GameObject implements IBaseCharacter
 
     public int getExperience() {
         return this.experience.experience;
+    }
+
+    /**
+     * Returns the characters health.
+     *
+     * @return An instance of <code>Health</code>.
+     */
+    public Health getHealth() {
+        return this.health;
     }
     //endregion
 

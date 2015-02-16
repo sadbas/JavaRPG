@@ -14,8 +14,6 @@ import java.util.Random;
  */
 public class Monster extends BaseCharacter {
 
-    private static final float BASE_HEALTH = 24.0f;
-
     //region Properties
     private int experienceGiven;
     //private Item[] loot;
