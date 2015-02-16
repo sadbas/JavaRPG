@@ -22,7 +22,7 @@ public abstract class BaseCharacter extends GameObject implements IBaseCharacter
 
     protected BaseCharacter() {
         this.name = "";
-        this.level = 1;
+        //this.level = 1;
         this.experience = new Experience();
         //this.skills = {new NormalAttack(), null, null, null};
     }
@@ -44,6 +44,10 @@ public abstract class BaseCharacter extends GameObject implements IBaseCharacter
      */
     public int getLevel() {
         return this.level;
+    }
+
+    public int getExperience() {
+        return this.experience.experience;
     }
     //endregion
 

@@ -33,6 +33,7 @@ public class Character extends BaseCharacter {
         this.characterClass = characterClass;
         this.name = name;
         this.level = 1;
+        this.gold = 0;
         this.damage = baseDamage();
         this.experience = new Experience();
         this.health = new Health();
@@ -42,6 +43,10 @@ public class Character extends BaseCharacter {
     //endregion
 
     //region Accessors
+    public CharacterClass getCharacterClass() {
+        return this.characterClass;
+    }
+
     /**
      * Returns the characters damage.
      *
@@ -58,6 +63,10 @@ public class Character extends BaseCharacter {
      */
     public Health getHealth() {
         return this.health;
+    }
+
+    public int getGold() {
+        return this.gold;
     }
     //endregion
 
@@ -142,14 +151,14 @@ public class Character extends BaseCharacter {
 
     //region Actions
     /**
-     * Drink potion to replenish 50% of maximum health, or no more than maximum health.
+     * Drink potion to replenish 60% of current health, or no more than maximum health.
      *
      * @return A float-value indicating how much health was regained.
      */
     public float drinkPotion() {
         float previousHealth = this.health.health;
 
-        this.health.health += this.health.maxHealth * 0.5f;
+        this.health.health += this.health.health * 0.6f;
 
         if (this.health.health > this.health.maxHealth) {
             this.health.health = this.health.maxHealth;
