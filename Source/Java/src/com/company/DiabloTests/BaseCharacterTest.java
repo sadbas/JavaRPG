@@ -5,7 +5,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class BaseCharacterTests {
+public class BaseCharacterTest {
 
     @Before
     public void setUp() throws Exception {
